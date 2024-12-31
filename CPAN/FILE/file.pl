@@ -9,11 +9,15 @@ use File::Slurp qw(append_file);
 use File::Find qw(find);
 use File::Basename qw(basename);
 use File::Basename qw(dirname);
+use File::Temp qw(tempfile);
 
-make_path("DoraDora.txt");
-remove_tree("DoraDora.txt");
-copy("Doraemon.txt","DoraDora_bkup.txt");
-move("Doraemon.txt","Doraemonismine.txt");
+#creats the directory
+make_path("DoraDora");
+#removes the directory
+#remove_tree("DoraDora");
+
+copy("Dora.txt","DoraDora_bkup.txt");
+move("Dora.txt","Doraemonismine.txt");
 print read_file("Doraemonismine.txt");
 append_file("Doraemonismine.txt","I like both of them");
 print read_file("Doraemonismine.txt");
@@ -32,3 +36,10 @@ find(\&findfile,".");
 
 print basename("/home/ubuntu/PERL/LetsLearnPerl/CPAN/FILE/file.pl");
 print dirname("/home/ubuntu/PERL/LetsLearnPerl/CPAN/FILE/file.pl");
+
+# this part of code is not working :(
+my ($fh,$tmpfile)=tempfile(UNLINK => 0);
+print $fh,"Look who created temp file";
+close($fh);
+print "Temporary file created: $tmpfile\n";
+
